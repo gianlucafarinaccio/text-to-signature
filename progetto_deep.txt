@@ -1,0 +1,50 @@
+* Gianluca Farinaccio, Daniele Ferneti
+* 03-12-2024
+* 
+* Idea progetto Deep Learning
+
+
+Generazione di firme a partire da input testuale
+
+L'idea generale è quella di realizzare un sistema che, dato in input un prompt testuale del tipo {nome} {cognome}, 
+restituisca in output una immagine di una firma.
+
+
+1. DATASET 
+
+Online sono disponibili dataset di firme reali ma non sono etichettati per motivi di privacy
+
+
+Nel caso in cui si presenti la necessità di un dataset etichettato di immagini tipo 
+{nome}-{cognome} --> immagine di firma
+
+Possibile soluzione: generare un dataset sintetico utilizzando font calligrafici ed una lista sintetica di nomi
+
+	- dafont.com per reperire i font calligrafici
+	- faker per la generazione di lista casuale di nomi, in alternativa gpt
+	- pillow per la generazione di immagini utilizzando script
+
+	Potremmo facilmente generare dataset da 4-5k immagini in modo rapido
+	Scelta di 10-15 font calligrafici, una lista sintetica di 2-3k nomi di diverse nazionalità
+
+
+2. PREPROCESSING
+
+Utilizzo di filtri per rendere le immagini generate da pillow più 'reali', sfocatura, rottura caratteri ecc...
+
+
+3. ARCHITETTURE
+
+- cGAN 
+	> per un dominio ristretto come il nostro potrebbero ottenere buoni risultati
+	> a livello didattico dovremmo essere in grado di fare una implementazione da 0
+	> a livello di risorse dovremmo essere apposto con colab standard
+	> potremmo utilizzare una doppio training: prima addestramento su dataset sintetico e poi fine tuning su dataset reale per rendere l'output 		  reale dal punto di vista visivo
+
+- Diffusion Models
+	> sicuramente otterremo migliori risultati rispetto alle GAN
+	> a livello didattico potrebbe non essere il top, ci limiteremo a fare solo un fine tuning di un modello open source StableDiffusion (?)
+	> a livello di risorse potrebbe essere molto dispendioso (?)
+	> potrebbero utilizzare una doppio training: prima addestramento su dataset sintetico e poi fine tuning su dataset reale per rendere l'output 		  reale dal punto di vista visivo
+
+
